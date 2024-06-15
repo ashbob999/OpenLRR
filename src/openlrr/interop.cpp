@@ -68,6 +68,7 @@
 #include "game/object/Building.h"
 #include "game/object/Collision.h"
 #include "game/object/Creature.h"
+#include "game/object/Dependencies.h"
 #include "game/object/MeshLOD.h"
 #include "game/object/Object.h"
 #include "game/object/ObjectRecall.h"
@@ -2023,6 +2024,38 @@ bool interop_hook_LegoRR_DamageText(void)
 	//          ObjInfo_DrawHealthBar
 	result &= hook_write_jmpret(0x0040aa10, LegoRR::DamageText_CanShow);
 	
+	return_interop(result);
+}
+
+bool interop_hook_LegoRR_Dependencies(void)
+{
+	bool result = true;
+
+	// used by: Lego_HandleWorldDebugKeys, OpenLRR_HandleCommand
+	result &= hook_write_jmpret(0x0040aa40, LegoRR::Dependencies_SetEnabled);
+	// used by: Level_Free
+	result &= hook_write_jmpret(0x0040aa60, LegoRR::Dependencies_Reset_ClearAllLevelFlags_10c);
+	// used by: Lego_Initialise
+	result &= hook_write_jmpret(0x0040aaa0, LegoRR::Dependencies_Initialise);
+	// used by: Lego_HandleWorldDebugKeys, AITask_DoBuildPath_AtPosition, Dependencies_Prepare_Unk,
+	// Interface_ChangeObjectIconFlag1_FUN_0041c730, Interface_HandleMenuItem
+	result &= hook_write_jmpret(0x0040add0, LegoRR::Dependencies_Object_FUN_0040add0);
+	// used by: Dependencies_Object_FUN_0040add0, Interface_FUN_0041ebd0
+	result &= hook_write_jmpret(0x0040ae70, LegoRR::Dependencies_LiveObject_CallbackCheck_FUN_0040ae70);
+	// used by: Dependencies_Object_FUN_0040add0, Dependencies_Object_Unlock, Dependencies_Object_Unlock,
+	// Interface_FUN_0041ebd0, Interface_FUN_0041edb0
+	result &= hook_write_jmpret(0x0040aec0, LegoRR::Dependencies_Object_GetRequirements);
+	// used by: HelpWindow_Object_Unlock
+	result &= hook_write_jmpret(0x0040af30, LegoRR::Dependencies_Object_Unlock);
+	// used by: Dependencies_Initialise, HelpWindow_RecallDependencies
+	result &= hook_write_jmpret(0x0040b0e0, LegoRR::Dependencies_Prepare_Unk);
+	// used by: HelpWindow_Object_Unlock
+	result &= hook_write_jmpret(0x0040b180, LegoRR::Dependencies_Object_IsLevelFlag4);
+	// used by: HelpWindow_RecallDependencies
+	result &= hook_write_jmpret(0x0040b1d0, LegoRR::Dependencies_Object_AddLevelFlag_100);
+	// used by: HelpWindow_RecallDependencies
+	result &= hook_write_jmpret(0x0040b210, LegoRR::Dependencies_Object_GetLevelFlag_100);
+
 	return_interop(result);
 }
 
@@ -4531,6 +4564,7 @@ bool interop_hook_all(void)
 	result &= interop_hook_LegoRR_Creature();
 	result &= interop_hook_LegoRR_Credits();
 	result &= interop_hook_LegoRR_DamageText();
+	result &= interop_hook_LegoRR_Dependencies();
 	result &= interop_hook_LegoRR_Effect();
 	result &= interop_hook_LegoRR_ElectricFence();
 	result &= interop_hook_LegoRR_Encyclopedia();

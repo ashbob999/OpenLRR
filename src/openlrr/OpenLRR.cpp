@@ -772,7 +772,7 @@ void __cdecl OpenLRR_HandleCommand(HWND hWnd, uint16 wmId, uint16 wmSrc)
 
 	case IDM_UNLOCKBUILD:
 		//std::printf("IDM_UNLOCKBUILD\n");
-		Dependencies_SetEnabled(!LegoRR::Dependencies_IsEnabled());
+		LegoRR::Dependencies_SetEnabled(!LegoRR::Dependencies_IsEnabled());
 		break;
 
 	case IDM_NOBUILDCOSTS:

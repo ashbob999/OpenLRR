@@ -64,6 +64,7 @@ bool interop_hook_LegoRR_Construction(void);
 bool interop_hook_LegoRR_Creature(void);
 bool interop_hook_LegoRR_Credits(void);
 bool interop_hook_LegoRR_DamageText(void);
+bool interop_hook_LegoRR_Dependencies(void);
 bool interop_hook_LegoRR_Effect(void);
 bool interop_hook_LegoRR_ElectricFence(void);
 bool interop_hook_LegoRR_Encyclopedia(void);
