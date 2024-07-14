@@ -402,7 +402,7 @@ void __cdecl OpenLRR_HandleCommand(HWND hWnd, uint16 wmId, uint16 wmSrc)
 
 	case IDM_AUTOGAMESPEED:
 		//std::printf("IDM_AUTOGAMESPEED\n");
-		Info_SetAutoGameSpeed(!LegoRR::Info_IsAutoGameSpeed());
+		LegoRR::Info_SetAutoGameSpeed(!LegoRR::Info_IsAutoGameSpeed());
 		updateOptionsMenuCycles();
 		break;
 

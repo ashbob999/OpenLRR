@@ -51,6 +51,7 @@
 #include "game/interface/hud/ObjInfo.h"
 #include "game/interface/Advisor.h"
 #include "game/interface/Encyclopedia.h"
+#include "game/interface/InfoMessages.h"
 #include "game/interface/Interface.h"
 #include "game/interface/Panels.h"
 #include "game/interface/Pointers.h"
@@ -2898,6 +2899,98 @@ bool interop_hook_LegoRR_Game(void)
 	return_interop(result);
 }
 
+bool interop_hook_LegoRR_InfoMessages(void)
+{
+	bool result = true;
+
+	// used by: Lego_Initialise
+	result &= hook_write_jmpret(0x00419160, LegoRR::Info_Initialise);
+	// used by: Info_SetText_internal, Lego_LoadInfoMessages
+	result &= hook_write_jmpret(0x00419310, LegoRR::Info_GetInfoType);
+	// used by: Info_SetText_internal
+	result &= hook_write_jmpret(0x00419350, LegoRR::Info_GetTypePtr4);
+	// used by: Info_Initialise
+	result &= hook_write_jmpret(0x00419360, LegoRR::Info_SetOverFlowImageFile);
+	// used by: Front_Callback_CycleAutoGameSpeed
+	result &= hook_write_jmpret(0x00419380, LegoRR::Info_SetAutoGameSpeed);
+	// used by: Lego_LoadInfoMessages
+	result &= hook_write_jmpret(0x004193a0, LegoRR::Info_SetTypeChangeGameSpeed);
+	// used by: Lego_LoadInfoMessages
+	result &= hook_write_jmpret(0x004193e0, LegoRR::Info_SetTypeText);
+	// used by: Lego_LoadInfoMessages
+	result &= hook_write_jmpret(0x00419420, LegoRR::Info_SetTypeFlag_20000);
+	// used by: Info_SetTypeText, Info_CreateInstance
+	result &= hook_write_jmpret(0x00419460, LegoRR::Info_SetText_internal);
+	// used by: Lego_LoadInfoMessages
+	result &= hook_write_jmpret(0x00419580, LegoRR::Info_SetTypeImageFile);
+	// used by: Lego_LoadInfoMessages
+	result &= hook_write_jmpret(0x004195b0, LegoRR::Info_SetTypeSFX);
+	// used by: Info_RemoveObjectReferences, Info_RemoveAllAtBlockPos,
+	//          Info_HasTypeAtObjectOrBlockPos
+	result &= hook_write_jmpret(0x004195d0, LegoRR::Info_EnumerateMessageInstances);
+	// used by: Info_Send
+	result &= hook_write_jmpret(0x00419620, LegoRR::Info_AddMessageInstance);
+	// used by: Info_RemoveMessageInstance
+	result &= hook_write_jmpret(0x004196b0, LegoRR::Info_GetMessageInstance);
+	// used by: Info_AddMessageInstance, Info_RemoveObjectReferences,
+	//          Info_RemoveAllAtBlockPos, Info_RemoveMessage
+	result &= hook_write_jmpret(0x004196e0, LegoRR::Info_RemoveMessageInstance);
+	// used by: Info_RemoveObjectReferences
+	result &= hook_write_jmpret(0x00419740, LegoRR::Info_Callback_FindObjectReference);
+	// used by: LegoObject_Remove
+	result &= hook_write_jmpret(0x00419760, LegoRR::Info_RemoveObjectReferences);
+	// used by: Info_RemoveAllAtBlockPos
+	result &= hook_write_jmpret(0x004197f0, LegoRR::Info_Callback_FindBlockPos);
+	// used by: Level_Block_ClearRubbleLayer
+	result &= hook_write_jmpret(0x00419820, LegoRR::Info_RemoveAllAtBlockPos);
+	// used by: Info_HasTypeAtObjectOrBlockPos
+	result &= hook_write_jmpret(0x004198d0, LegoRR::Info_Callback_FindObjectAndBlockPos);
+	// used by: Info_Send
+	result &= hook_write_jmpret(0x00419920, LegoRR::Info_HasTypeAtObjectOrBlockPos);
+	// used by: Info_Send
+	result &= hook_write_jmpret(0x004199b0, LegoRR::Info_CreateInstance);
+	// used by: Lego_LoadLevel, Level_Free
+	result &= hook_write_jmpret(0x00419a10, LegoRR::Info_SetFlag4);
+	// used by: Info_Send
+	result &= hook_write_jmpret(0x00419a30, LegoRR::Info_HasTypeText);
+	// used by: Info_Send
+	result &= hook_write_jmpret(0x00419a50, LegoRR::Info_FindExistingMessageType);
+	// used by: Info_Send
+	result &= hook_write_jmpret(0x00419a80, LegoRR::Info_FUN_00419a80);
+	// used by: Construction_Zone_CompleteBuilding, Erode_Update, Fallin_Update,
+	//          Fallin_Block_FUN_0040f260, Lego_MainLoop, Lego_HandleWorldDebugKeys,
+	//          Lego_UpdateFallins, Level_DestroyWall, Level_Block_Reinforce,
+	//          HiddenObject_ExposeBlock, LegoObject_AddThisDrainedCrystals, Level_GenerateCrystal,
+	//          LegoObject_TryGenerateSlug, LegoObject_TryGenerateRMonster, LegoObject_UpdateRemoval,
+	//          LegoObject_UpdateElapsedTimes, LegoObject_Callback_Update, LegoObject_ProccessCarriedObjects,
+	//          LegoObject_TrainMiniFigure_instantunk, LegoObject_FUN_00447880, LegoObject_SimpleObject_MoveAnimation
+	result &= hook_write_jmpret(0x00419ab0, LegoRR::Info_Send);
+	// used by: Panel_CheckCollision
+	result &= hook_write_jmpret(0x00419cd0, LegoRR::Info_GotoFirst);
+	// used by: Info_Update_FUN_0041a0d0, Panel_CheckCollision
+	result &= hook_write_jmpret(0x00419d10, LegoRR::Info_UpdateMessage);
+	// used by: Panel_CheckCollision
+	result &= hook_write_jmpret(0x00419d90, LegoRR::Info_PopFirstMessage);
+	// used by: Info_ClearAllMessages, Info_PopFirstMessage, Info_RemoveAllAtBlockPos, Info_RemoveObjectReferences
+	result &= hook_write_jmpret(0x00419db0, LegoRR::Info_RemoveMessage);
+	// used by: Level_Free
+	result &= hook_write_jmpret(0x00419e40, LegoRR::Info_ClearAllMessages);
+	// used by: Lego_MainLoop
+	result &= hook_write_jmpret(0x00419e60, LegoRR::Info_Draw);
+	// used by: Lego_MainLoop
+	result &= hook_write_jmpret(0x00419fb0, LegoRR::Info_DrawPanel);
+	// used by: Lego_HandleWorld
+	result &= hook_write_jmpret(0x0041a0d0, LegoRR::Info_Update_FUN_0041a0d0);
+	// used by: Info_DrawPanel
+	result &= hook_write_jmpret(0x0041a180, LegoRR::Info_FUN_0041a180);
+	// used by: Info_FUN_0041a180, Panel_CheckCollision
+	result &= hook_write_jmpret(0x0041a1c0, LegoRR::Info_UpdateInt6EC_FromScrollInfo);
+	// used by: Lego_MainLoop
+	result &= hook_write_jmpret(0x0041a1f0, LegoRR::Info_FUN_0041a1f0);
+
+	return_interop(result);
+}
+
 bool interop_hook_LegoRR_Interface(void)
 {
 	bool result = true;
@@ -4572,6 +4665,7 @@ bool interop_hook_all(void)
 	result &= interop_hook_LegoRR_Fallin();
 	result &= interop_hook_LegoRR_FrontEnd();
 	result &= interop_hook_LegoRR_Game();
+	result &= interop_hook_LegoRR_InfoMessages();
 	result &= interop_hook_LegoRR_Interface();
 	result &= interop_hook_LegoRR_LegoCamera();
 	result &= interop_hook_LegoRR_LightEffects();

@@ -72,6 +72,7 @@ bool interop_hook_LegoRR_Erosion(void);
 bool interop_hook_LegoRR_Fallin(void);
 bool interop_hook_LegoRR_FrontEnd(void);
 bool interop_hook_LegoRR_Game(void);
+bool interop_hook_LegoRR_InfoMessages(void);
 bool interop_hook_LegoRR_Interface(void);
 bool interop_hook_LegoRR_LegoCamera(void);
 bool interop_hook_LegoRR_LightEffects(void);
